@@ -1,6 +1,17 @@
-let promise = new Promise((res, rej) => {
-  res()
-})
+function sleep(time = 2) {
+  return new Promise(resolve => setTimeout(() => { console.log('promise resolved'); resolve() }, time * 1000))
+}
 
-promise.then(function () { console.log('first then') })
-promise.then(function () { console.log('second then') })
+const promiseCreatorList = [
+  sleep,
+  sleep,
+  sleep
+]
+
+function all(list) {
+  list.reduce((memo, current) => {
+    return memo.then(current)
+  }, Promise.resolve())
+}
+
+all(promiseCreatorList)
