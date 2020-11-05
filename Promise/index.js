@@ -1,17 +1,6 @@
-let promise1 = new Promise(function (resolve, reject) {
-  console.log('promise1 entered')
-  setTimeout(function () {
-    resolve()
-  }, 1000)
+let promise = new Promise((res, rej) => {
+  res()
 })
 
-promise1
-  .then(function () {
-    return new Promise(function (resolve) {
-      console.log('promise1 resolved')
-      setTimeout(resolve, 1000)
-    })
-  })
-  .then(function () {
-    console.log('promise2 resolved')
-  })
+promise.then(function () { console.log('first then') })
+promise.then(function () { console.log('second then') })
