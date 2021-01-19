@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖</title>
+  <style>
+    .box{
+      height: 200px;
+      background: #f22;
+    }
+  </style>
+</head>
+<body>
+  <h1>就是指触发事件后在n秒内函数只能执行一次，如果在n秒内再次触发了事件，则重新计算时间</h1>
+  <div class="box"></div>
+  <script>
+    var box = document.querySelector('.box');
+    box.onmousemove = debounce(move, 500);
+    function debounce(fn, wait){
+      let timmer = null;
+      return function(e){
+        if(!timmer){
+          fn.call(this,e);
+        }
+        timmer && clearTimeout(timmer);
+        timmer = setTimeout(() => {
+          fn.call(this,e);
+        }, wait);
+      }
+    }
+    function move(e){
+      this.innerHTML = e.clientX + ',' + e.clientY;
+    }
+  </script>
+</body>
+</html>

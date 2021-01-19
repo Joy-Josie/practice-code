@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>节流</title>
+  <style>
+    .box{
+      height: 200px;
+      background: #f22;
+    }
+  </style>
+</head>
+<body>
+  <h1>就是指连续触发时间但是在一段时间中只执行一次函数</h1>
+  <div class="box"></div>
+  <script>
+    var box = document.querySelector('.box');
+    box.onmousemove = throttle(move, 1000);
+
+    function move(e){
+      this.innerHTML = e.clientX + ',' + e.clientY;
+    }
+
+    function throttle(fn, wait){
+      let timmer = null;
+      return function(e){
+        if(!timmer){
+          timmer = setTimeout(() => {
+            fn.call(this, e);
+            timmer = null;
+          }, wait);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
