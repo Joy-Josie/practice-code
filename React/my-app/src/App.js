@@ -1,23 +1,21 @@
 import Clock from "./components/Clock";
 import React from "react";
 import "./App.css";
+import './components/Clock.css'
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      time: 0,
-      timeID: 0,
-    };
-  }
+  state = {
+    time: 0,
+    timeID: 0,
+  };
 
-  startInterval() {
+  startInterval = () => {
     this.timeID = setInterval(() => {
       this.setState({ time: new Date().toLocaleTimeString() });
     }, 1000);
   }
 
-  click() {
+  click = () => {
     clearInterval(this.timeID);
   }
 

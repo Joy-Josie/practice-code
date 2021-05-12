@@ -1,0 +1,33 @@
+{
+  /*
+      用来指定需要编译的文件
+      **: 表示任意目录
+       *: 表示任意文件
+  */ 
+  "include": ["./**/*", "../tsconfig.json"],
+  // 用来指定不想编译的文件 同样是文件路径
+  "exclude": [],
+  // 编译器选项
+  "compilerOptions": {
+    // 用来指定编译的es版本
+    "target": "ES6",
+    // 模块化解决方案
+    "module": "es6",
+    // 用来指定需要使用的库，一般不指定  默认为es6、dom
+    // "lib": []
+    // 用来指定编译后文件存放目录
+    "outDir": "./dist",
+    // 严格检查的总开关
+    "strict": false,
+    // 将代码合并为一个文件 一般不使用  交给打包工具
+    // "outFile": "./dist/app.js"
+    // 有错误是不生成编译文件
+    "noEmitOnError": true,
+    // 不允许隐式的any类型
+    "noImplicitAny": true,
+    // 不允许不明确类型的this
+    "noImplicitThis": false,
+    // 严格检查空值
+    "strictNullChecks": true
+  }
+}
