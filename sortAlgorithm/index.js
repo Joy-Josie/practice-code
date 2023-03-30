@@ -1,15 +1,18 @@
 const { bubbleSort } = require('./bubble.js')
 const { insertionSort } = require('./insertion.js')
-const { calcTime } = require('./utils.js')
+const { calcTime, copyArr } = require('./utils.js')
+const { mergeSort } = require('./merge')
 
-function makeArr() {
+function makeArr(times) {
   const arr = []
-  const length = Number((Math.random() * 100000).toFixed(0))
+  const length = Number((Math.random() * times).toFixed(0))
   for (let i = 1; i < length; i++) {
-    arr.push(Number((Math.random() * 100000).toFixed(0)))
+    arr.push(Number((Math.random() * times).toFixed(0)))
   }
   return arr
 }
+const testArr = makeArr(100000)
 
-console.log(calcTime(bubbleSort, makeArr()))
-console.log(calcTime(insertionSort, makeArr()))
+console.log(calcTime(bubbleSort, copyArr(testArr)))
+console.log(calcTime(insertionSort, copyArr(testArr)))
+console.log(calcTime(mergeSort, copyArr(testArr)))
