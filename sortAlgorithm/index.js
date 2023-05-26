@@ -1,18 +1,18 @@
-const { bubbleSort } = require('./bubble.js')
-const { insertionSort } = require('./insertion.js')
-const { calcTime, copyArr } = require('./utils.js')
+const { bubbleSort } = require('./bubble')
+const { insertionSort } = require('./insertion')
+const { calcTime, copyArr, makeArr } = require('./utils')
 const { mergeSort } = require('./merge')
+const { quickSort } = require('./quick')
+const { heapSort } = require('./heap')
+const { bucketSort } = require('./bucket')
 
-function makeArr(times) {
-  const arr = []
-  const length = Number((Math.random() * times).toFixed(0))
-  for (let i = 1; i < length; i++) {
-    arr.push(Number((Math.random() * times).toFixed(0)))
-  }
-  return arr
-}
-const testArr = makeArr(100000)
+const testArr = makeArr(1000000)
+// const testArr = [109, 102, 12, 23, 28, 23, 3, 89, 309, 103]
 
-console.log(calcTime(bubbleSort, copyArr(testArr)))
-console.log(calcTime(insertionSort, copyArr(testArr)))
+console.log('length', testArr.length)
+// console.log(calcTime(bubbleSort, copyArr(testArr)))
+// console.log(calcTime(insertionSort, copyArr(testArr)))
 console.log(calcTime(mergeSort, copyArr(testArr)))
+console.log(calcTime(quickSort, copyArr(testArr)))
+console.log(calcTime(heapSort, copyArr(testArr)))
+console.log(calcTime(bucketSort, copyArr(testArr)))

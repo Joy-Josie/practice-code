@@ -15,8 +15,8 @@ class Promise {
       if (this.status !== 'pending') return
       if (val instanceof Promise) {
         val.then(
-          value => { },
-          err => { }
+          (value) => {},
+          (err) => {}
         )
       } else {
         // resolve方法传入的是普通值
@@ -28,7 +28,7 @@ class Promise {
   }
 
   triggerFulfilled(val) {
-    this.fulfilledList.forEach(item => item(val))
+    this.fulfilledList.forEach((item) => item(val))
     this.fulfilledList = []
   }
 
@@ -38,8 +38,8 @@ class Promise {
       if (this.status !== 'pending') return
       if (val instanceof Promise) {
         val.then(
-          value => { },
-          err => { }
+          (value) => {},
+          (err) => {}
         )
       } else {
         // resolve方法传入的是普通值
@@ -51,7 +51,7 @@ class Promise {
   }
 
   triggerRejected(val) {
-    this.rejectedList.forEach(item => item(val))
+    this.rejectedList.forEach((item) => item(val))
     this.rejectedList = []
   }
 
@@ -109,13 +109,11 @@ class Promise {
     })
   }
 
-  catch(onRejected) {
-
-  }
+  catch(onRejected) {}
 
   static resolve(val) {
     if (val instanceof Promise) return val
-    return new Promise(resolve => resolve(val))
+    return new Promise((resolve) => resolve(val))
   }
 
   static reject(val) {
@@ -127,35 +125,33 @@ class Promise {
       let count = 0
       const values = []
       for (const [i, promiseinstance] of list.entries()) {
-        Promise.resolve(promiseinstance)
-          .then(
-            res => {
-              values[i] = res
-              count++
-              if (count === list.length) resolve(values)
-            },
-            err => {
-              values[i] = err
-              count++
-              if (count === list.length) reject(err)
-            }
-          )
+        Promise.resolve(promiseinstance).then(
+          (res) => {
+            values[i] = res
+            count++
+            if (count === list.length) resolve(values)
+          },
+          (err) => {
+            values[i] = err
+            count++
+            if (count === list.length) reject(err)
+          }
+        )
       }
     })
   }
 
   static race(list) {
     return new Promise((resolve, reject) => {
-      list.forEach(item => {
-        Promise.resolve(item)
-          .then(
-            res => {
-              resolve(res)
-            },
-            err => {
-              reject(err)
-            }
-          )
+      list.forEach((item) => {
+        Promise.resolve(item).then(
+          (res) => {
+            resolve(res)
+          },
+          (err) => {
+            reject(err)
+          }
+        )
       })
     })
   }
