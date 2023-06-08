@@ -1,4 +1,4 @@
-exports.bucketSort = (arr) => {
+exports.bucketSort = arr => {
   const maxDigit = getMaxDigit(arr)
   process(arr, maxDigit)
   return arr

@@ -1,4 +1,4 @@
-exports.mergeSort = (arr) => {
+exports.mergeSort = arr => {
   process(arr, 0, arr.length - 1)
   return arr
 }
