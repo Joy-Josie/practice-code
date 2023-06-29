@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { useState, useEffect } from 'react'
 import './App.css'
 
@@ -30,7 +31,7 @@ function generateGround(): mineBlock[][] {
 function generateMines(ground: mineBlock[][]) {
   for (const row of ground) {
     for (const block of row) {
-      block.mine = Math.random() < 0.15
+      block.mine = Math.random() < 0.13
     }
   }
   return ground
@@ -67,12 +68,15 @@ function initAll() {
 
 function App() {
   const [ground, setGround] = useState(initAll())
+  const [isOver, setIsOver] = useState(false)
 
   function handleRestart() {
     setGround(initAll())
+    setIsOver(false)
   }
 
   function handleOver() {
+    setIsOver(true)
     for (const row of ground) {
       for (const block of row) {
         block.revealed = true
@@ -132,10 +136,10 @@ function App() {
   useEffect(() => {
     const win = ground.every(row => {
       return row.every(block => {
-        return block.revealed && (!block.mine || block.flagged)
+        return block.revealed || (block.mine && block.flagged)
       })
     })
-    if (win) {
+    if (win && !isOver) {
       window.alert('You win!')
     }
   })

@@ -1,8 +1,11 @@
 {
 	"devDependencies": {
-		"unocss": "^0.53.1",
-		"@unocss/preset-uno": "^0.53.1",
 		"@unocss/preset-attributify": "^0.53.1",
-		"@unocss/preset-icons": "^0.53.1"
+		"@unocss/preset-icons": "^0.53.1",
+		"@unocss/preset-uno": "^0.53.1",
+		"unocss": "^0.53.1"
+	},
+	"dependencies": {
+		"node-xlsx": "^0.23.0"
 	}
 }
