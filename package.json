@@ -1,11 +1,29 @@
 {
-	"devDependencies": {
-		"@unocss/preset-attributify": "^0.53.1",
-		"@unocss/preset-icons": "^0.53.1",
-		"@unocss/preset-uno": "^0.53.1",
-		"unocss": "^0.53.1"
-	},
-	"dependencies": {
-		"node-xlsx": "^0.23.0"
-	}
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@unocss/preset-attributify": "^0.53.1",
+    "@unocss/preset-icons": "^0.53.1",
+    "@unocss/preset-uno": "^0.53.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react": "^7.35.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.9",
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.1.0",
+    "unocss": "^0.53.1"
+  },
+  "dependencies": {
+    "node-xlsx": "^0.23.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "lint-staged"
+  }
 }
