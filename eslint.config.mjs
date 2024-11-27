@@ -2,7 +2,7 @@
  * @Author: WangZhuoYi 13317149311@163.com
  * @Date: 2024-08-16 08:44:31
  * @LastEditors: WangZhuoYi 13317149311@163.com
- * @LastEditTime: 2024-08-16 10:32:27
+ * @LastEditTime: 2024-11-26 16:06:29
  * @FilePath: /practice-code/eslint.config.mjs
  * @Description:
  */
@@ -21,6 +21,7 @@ export default [
 		rules: {
 			'@typescript-eslint/no-require-imports': 'off',
 			'no-useless-escape': 'off',
+			'no-control-regex': 'off',
 		},
 	},
 ]
