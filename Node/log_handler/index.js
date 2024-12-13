@@ -2,8 +2,8 @@
  * @Author: WangZhuoYi 13317149311@163.com
  * @Date: 2024-11-22 19:59:51
  * @LastEditors: WangZhuoYi 13317149311@163.com
- * @LastEditTime: 2024-11-27 12:42:11
- * @FilePath: /practice-code/Node/fs/test/index.js
+ * @LastEditTime: 2024-12-13 12:21:34
+ * @FilePath: /practice-code/Node/log_handler/index.js
  * @Description:
  */
 const fs = require("fs");
@@ -42,7 +42,7 @@ function readFile() {
   let buffer = Buffer.alloc(0);
   let tempStr = "";
   let recording = false;
-  let tempArr = [];
+  const tempObj = {};
 
   readStream.on("data", (chunk) => {
     buffer = Buffer.concat([buffer, chunk]);
@@ -55,7 +55,15 @@ function readFile() {
           recording = false;
           tempStr +=
             decodedChunk.split(endRegex)[0] + '"SerialNo": "CSM3100478"}';
-          tempArr.push(tempStr);
+          const serial = tempStr
+            .match(/"PatientID":\s*"([^"]*)"/g)[0]
+            .split('"')
+            .at(-2);
+          if (numbers.size && numbers.has(serial)) {
+            tempObj[serial] = tempStr;
+          } else if (!numbers.size) {
+            tempObj[serial] = tempStr;
+          }
           tempStr = "";
         } else {
           tempStr += decodedChunk;
@@ -70,18 +78,6 @@ function readFile() {
   });
 
   readStream.on("end", () => {
-    const tempObj = {};
-    tempArr.forEach((item) => {
-      const serial = item
-        .match(/"PatientID":\s*"([^"]*)"/g)[0]
-        .split('"')
-        .at(-2);
-      if (numbers.size && numbers.has(serial)) {
-        tempObj[serial] = item;
-      } else if (!numbers.size) {
-        tempObj[serial] = item;
-      }
-    });
     Object.keys(tempObj).map((key) => {
       const regex = /\\n\x00+/g;
       const item = tempObj[key];
